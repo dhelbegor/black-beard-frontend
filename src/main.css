@@ -1,0 +1,8 @@
+/* resets */
+@tailwind base;
+
+/* components */
+@tailwind components;
+
+/* utility classes */
+@tailwind utilities;
