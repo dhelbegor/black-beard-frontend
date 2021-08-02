@@ -27,7 +27,7 @@ expectJson  toMsg decoder =
                     Err "NetWork error."
 
                 Http.BadStatus_ _ error ->
-                    case Json.decodeString (Json.field "string" Json.string) error of
+                    case Json.decodeString (Json.field "error" Json.string) error of
                         Ok errorMsg ->
                             Err errorMsg
 
