@@ -1,17 +1,24 @@
 module View exposing (..)
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (..)
-import Html.Attributes exposing (..)
-
-import Types exposing (Model, Model3D, Image, Msg(..))
-import Api exposing (..)
 import Json.Decode as Json exposing (Decoder)
-import Serializer.Decode exposing (..)
-import Helpers exposing (imageRenderer)
 import Http
 import Array
 import Url
+import Url.Parser exposing (Parser, parse, int, map, oneOf, s, top)
+
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Route exposing (..)
+import Types exposing (Model, Msg(..), Route(..))
+import Api exposing (..)
+import Serializer.Decode exposing (..)
+import Helpers exposing (imageRenderer)
+import RemoteData exposing (RemoteData)
+import Page.Home exposing (viewHome)
+import Page.Contact exposing (viewContact)
+import Page.NotFound exposing (viewNotFound)
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -24,61 +31,21 @@ update msg model =
                     (model, Nav.load ref)
 
         UrlChanged url ->
-            ({model | url = url}, Cmd.none)
+            ({model | route = fromUrl url}, Cmd.none)
         
-        GotModel (Ok models) ->
-            ({ model | models = models }, Cmd.none)
-        
-        GotModel (Err errors) ->
-            ({ model | errors = errors :: model.errors}, Cmd.none)
+        GotModel resp ->
+            ({ model | models = RemoteData.fromResult resp }, Cmd.none)
 
 
 view : Model -> Browser.Document Msg
 view model =
-    {title = "The Black Beard 3D"
-    , body = [
-        div [] [itemView model]
-        , linkView "/home" "Home"
-    ]
-    }
+    case model.route of
+        Home ->
+            viewHome model
 
-itemView: Model -> Html Msg
-itemView model =
-    case List.isEmpty model.errors of
-        False -> 
-            div [] [text (Debug.toString model.errors)]
-            
-        True -> 
-            case List.isEmpty model.models of
-                False ->
-                    div [class "container"] [
-                        div [class "md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4"] [
-                            h1 [class "text-gray-700 lg:text-center"] [ text "" ]
-                        ]
-                        ,div [] (List.map modelView model.models)
-                    ]
-                True ->
-                    div [class "text-center"] [text "Nothing to show."]
+        Contact ->
+            viewContact
 
-
-modelView: Model3D -> Html Msg
-modelView model =
-    div [] [
-        p [] [text model.name]
-        , p [] [text model.description]
-        , div [] [imageView model.images]
-    ]
-
-imageView: List Image -> Html Msg
-imageView item =
-    case List.head item of
-        Just image ->
-            img [src (imageRenderer image.url)] []
-
-        Nothing ->
-            img [src ""] []
-
-linkView: String -> String -> Html Msg
-linkView path name =
-    a [href path] [text name]
+        NotFound ->
+            viewNotFound
 

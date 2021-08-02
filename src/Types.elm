@@ -3,23 +3,25 @@ import Http
 import Browser
 import Browser.Navigation as Nav
 import Url
+import RemoteData exposing (RemoteData)
 
 
 type alias Model =
     {key: Nav.Key
     , url: Url.Url
-    , models: List Model3D
-    , errors: List Http.Error
+    , models: RemoteData String (List Model3D)
+    , route: Route
     }
 
 type Msg
-    = GotModel (Result Http.Error (List Model3D))
+    = GotModel (Result String (List Model3D))
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
 
 type Route
     = Home
     | Contact
+    | NotFound
 
 type alias Model3D =
     { name: String
@@ -29,3 +31,5 @@ type alias Model3D =
 
 type alias Image =
     {url: String}
+
+
