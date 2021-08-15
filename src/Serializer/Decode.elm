@@ -5,7 +5,8 @@ import Types exposing (Model3D, Image)
 
 modelDecoder: Decoder Model3D
 modelDecoder =
-    Json.map3 Model3D
+    Json.map4 Model3D
+        (Json.field "id" Json.int)
         (Json.field "name" Json.string)
         (Json.field "description" Json.string)
         (Json.field "images" (Json.list imageDecoder))

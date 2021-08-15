@@ -11,7 +11,6 @@ imageRenderer: String -> String
 imageRenderer imgUrl =
     String.concat [baseUrl, imgUrl]
 
-
 expectJson: (Result String a -> msg) -> Json.Decoder a -> Http.Expect msg
 expectJson  toMsg decoder =
     Http.expectStringResponse toMsg <|

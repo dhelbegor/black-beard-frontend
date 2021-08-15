@@ -14,7 +14,7 @@ import Route exposing (fromUrl)
 import RemoteData exposing (RemoteData)
 
 
-main : Program () Model Msg
+main: Program () Model Msg
 main =
     Browser.application
         { init = init
@@ -33,7 +33,7 @@ initialModel url key =
     , route = fromUrl url
     }
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init: () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
     ((initialModel url key)
     , Http.get {

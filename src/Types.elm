@@ -24,7 +24,8 @@ type Route
     | NotFound
 
 type alias Model3D =
-    { name: String
+    { id: Int
+    , name: String
     , description: String
     , images: List Image
     }

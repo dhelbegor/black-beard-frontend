@@ -23,11 +23,11 @@ viewNav =
 
 viewFooter: Html Msg
 viewFooter =
-    footer [class "fixed bottom-0 inset-x-0 bg-gray-800 p-4"] [text "footer"]
+    footer [class "py-2 px-10 h-10 w-full fixed bottom-0 z-10 bg-gray-800"] [text "footer"]
 
 view: Html Msg -> Html Msg
 view content =
-    div [class "h-screen bg-gray-200"] 
+    div [class "min-h-screen flex flex-col bg-gray-200"] 
     [viewNav
     , content
     , viewFooter
