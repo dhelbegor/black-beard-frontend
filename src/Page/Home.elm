@@ -15,7 +15,7 @@ viewHome: Model -> Browser.Document Msg
 viewHome model =
     pageBuilder ""
     (base <|
-        section [class "bg-gray-200"] [
+        section [class "container mx-auto bg-gray-200"] [
             div [class "py-5 px-10 h-auto mb-20 content-center"] [
                 responseProcess model.models
                 , div [class "py-10 text-2xl text-center"] [
