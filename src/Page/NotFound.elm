@@ -12,7 +12,7 @@ viewNotFound: Browser.Document Msg
 viewNotFound =
     pageBuilder "Not Found"
     (base <|
-        section [class "bg-gray-200"] [
-            div [class "py-2 px-14"] [text "Page Not Found."]
+        section [class "container mx-auto bg-gray-200"] [
+            div [class "py-5 px-10 h-auto mb-auto content-center"] [text "Page Not Found."]
         ]
     )  
