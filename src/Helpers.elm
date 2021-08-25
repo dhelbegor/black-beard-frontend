@@ -1,18 +1,22 @@
-module Helpers exposing (imageRenderer, expectJson)
+module Helpers exposing (expectJson, imageRenderer)
 
+import Api exposing (baseUrl)
 import Http
 import Json.Decode as Json
 
-import Api exposing (baseUrl)
+
 
 -- create a full url image with the base url
 -- dropLeft was needed to remove an extra / from the url.
-imageRenderer: String -> String
-imageRenderer imgUrl =
-    String.concat [baseUrl, imgUrl]
 
-expectJson: (Result String a -> msg) -> Json.Decoder a -> Http.Expect msg
-expectJson  toMsg decoder =
+
+imageRenderer : String -> String
+imageRenderer imgUrl =
+    String.concat [ baseUrl, imgUrl ]
+
+
+expectJson : (Result String a -> msg) -> Json.Decoder a -> Http.Expect msg
+expectJson toMsg decoder =
     Http.expectStringResponse toMsg <|
         \response ->
             case response of
@@ -39,5 +43,4 @@ expectJson  toMsg decoder =
                             Ok value
 
                         Err err ->
-                            Err <| String.concat ["Error: ", Json.errorToString err]
-
+                            Err <| String.concat [ "Error: ", Json.errorToString err ]

@@ -1,23 +1,23 @@
 module View exposing (..)
+
+import Api exposing (..)
+import Array
 import Browser
 import Browser.Navigation as Nav
-import Json.Decode as Json exposing (Decoder)
-import Http
-import Array
-import Url
-import Url.Parser exposing (Parser, parse, int, map, oneOf, s, top)
-
+import Helpers exposing (imageRenderer)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Route exposing (..)
-import Types exposing (Model, Msg(..), Route(..))
-import Api exposing (..)
-import Serializer.Decode exposing (..)
-import Helpers exposing (imageRenderer)
-import RemoteData exposing (RemoteData)
-import Page.Home exposing (viewHome)
+import Http
+import Json.Decode as Json exposing (Decoder)
 import Page.Contact exposing (viewContact)
+import Page.Home exposing (viewHome)
 import Page.NotFound exposing (viewNotFound)
+import RemoteData exposing (RemoteData)
+import Route exposing (..)
+import Serializer.Decode exposing (..)
+import Types exposing (Model, Msg(..), Route(..))
+import Url
+import Url.Parser exposing (Parser, int, map, oneOf, parse, s, top)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -26,15 +26,16 @@ update msg model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    (model, Nav.pushUrl model.key (Url.toString url))
+                    ( model, Nav.pushUrl model.key (Url.toString url) )
+
                 Browser.External ref ->
-                    (model, Nav.load ref)
+                    ( model, Nav.load ref )
 
         UrlChanged url ->
-            ({model | route = fromUrl url}, Cmd.none)
-        
+            ( { model | route = fromUrl url }, Cmd.none )
+
         GotModel resp ->
-            ({ model | models = RemoteData.fromResult resp }, Cmd.none)
+            ( { model | models = RemoteData.fromResult resp }, Cmd.none )
 
 
 view : Model -> Browser.Document Msg
@@ -48,4 +49,3 @@ view model =
 
         NotFound ->
             viewNotFound
-
