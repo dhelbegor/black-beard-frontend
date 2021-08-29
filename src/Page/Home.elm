@@ -18,34 +18,6 @@ viewHome model =
             section [ class "container mx-auto mb-auto bg-gray-200" ]
                 [ div [ class "py-5 px-10 content-center" ]
                     [ responseProcess model.models
-                    , div [ class "py-10 text-2xl text-center" ]
-                        [ div [ class "flex flex-col items-center my-12" ]
-                            [ div [ class "flex text-gray-700" ]
-                                [ div [ class "h-8 w-8 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer" ]
-                                    [ Svg.svg
-                                        [ ST.width "100%"
-                                        , ST.height "100%"
-                                        , ST.fill "none"
-                                        , ST.viewBox "0 0 24 24"
-                                        , ST.stroke "currentColor"
-                                        , ST.strokeWidth "2"
-                                        , ST.strokeLinecap "round"
-                                        , ST.strokeLinejoin "round"
-                                        , ST.class "feather feather-chevron-left w-6 h-6"
-                                        , ST.xmlBase "http://www.w3.org/2000/svg"
-                                        ]
-                                        [ Svg.polyline [ ST.points "5 18 9 12 15 6" ] [] ]
-                                    ]
-                                , div [ class "flex h-8 font-medium rounded-full bg-gray-200" ]
-                                    [ div [ class "w-8 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full" ] [ text "1" ]
-                                    , div [ class "w-8 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full" ] [ text "2" ]
-                                    , div [ class "w-8 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full text-white bg-green-600" ] [ text "3" ]
-                                    , div [ class "w-8 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full" ] [ text "4" ]
-                                    , div [ class "w-8 md:flex justify-center items-center hidden  cursor-pointer leading-5 transition duration-150 ease-in  rounded-full" ] [ text "5" ]
-                                    ]
-                                ]
-                            ]
-                        ]
                     ]
                 ]
         )

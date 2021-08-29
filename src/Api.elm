@@ -8,4 +8,4 @@ baseUrl =
 
 getModels : String
 getModels =
-    String.concat [ baseUrl, "/api/", "models/" ]
+    String.concat [ baseUrl, "/api/", "models/?page_size=99999" ]
