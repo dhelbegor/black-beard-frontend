@@ -23,6 +23,12 @@ import Url.Parser exposing (Parser, int, map, oneOf, parse, s, top)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        SelectModel model3d ->
+            ( { model | selectedModel = Just model3d }, Cmd.none )
+
+        CloseModal ->
+            ( { model | selectedModel = Nothing }, Cmd.none )
+
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->

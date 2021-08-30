@@ -12,6 +12,7 @@ type alias Model =
     , url : Url.Url
     , models : RemoteData String (List Model3D)
     , route : Route
+    , selectedModel : Maybe Model3D
     }
 
 
@@ -19,6 +20,8 @@ type Msg
     = GotModel (Result String (List Model3D))
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url
+    | SelectModel Model3D
+    | CloseModal
 
 
 type Route

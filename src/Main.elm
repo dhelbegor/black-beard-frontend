@@ -32,6 +32,7 @@ initialModel url key =
     , url = url
     , models = RemoteData.Loading
     , route = fromUrl url
+    , selectedModel = Nothing
     }
 
 
